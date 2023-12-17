@@ -1,14 +1,13 @@
 {
-  "name": "@openenergytools/scl-text-field",
-  "description": "TextField for SCL related attribute",
+  "name": "@openenergytools/filterable-lists",
+  "description": "Case specific list web-components designed to work with XML elements",
   "license": "Apache-2.0",
   "version": "0.0.1",
   "type": "module",
-  "main": "dist/scl-text-field.js",
-  "module": "dist/scl-text-field.js",
-  "exports": {
-    ".": "./dist/scl-text-field.js"
-  },
+  "exports": [
+    "./dist/selection-list.js",
+    "./dist/action-list.js"
+  ],
   "scripts": {
     "analyze": "cem analyze",
     "start": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wds\"",
