@@ -3,10 +3,14 @@
   "description": "Case specific list web-components designed to work with XML elements",
   "license": "Apache-2.0",
   "version": "0.0.1",
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "files": [
-    "./dist/selection-list.js",
-    "./dist/action-list.js"
+    "./dist/*.js",
+    "./dist/*.js.map",
+    "./dist/*.d.ts"
   ],
   "scripts": {
     "analyze": "cem analyze",
