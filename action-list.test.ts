@@ -300,4 +300,52 @@ describe('Custom List component ActionList', () => {
       await visualDiff(list, `action-list/filtered`);
     });
   });
+
+  describe('allows to add dividers', () => {
+    let list: ActionList;
+
+    beforeEach(async () => {
+      list = await fixture(
+        html`<action-list
+          .items=${[
+            {
+              headline: 'item1',
+              divider: true,
+              filtergroup: ['item2', 'item3', 'item4', 'item5'],
+              primaryAction: () => {},
+              actions: [
+                { icon: 'edit', callback: () => {} },
+                { icon: 'delete', callback: () => {} },
+                { icon: 'add', callback: () => {} },
+              ],
+            },
+            { headline: 'item2' },
+            { headline: 'item3', divider: true },
+            { headline: 'item4', divider: true },
+            { headline: 'item5' },
+          ]}
+          filterable
+        ></action-list>`
+      );
+      list.style.width = '300px';
+      document.body.prepend(list);
+    });
+
+    afterEach(() => {
+      if (list) list.remove();
+    });
+
+    it('show divider textfield', async () => {
+      await timeout(200);
+      await visualDiff(list, `action-list/divider `);
+    });
+
+    it('filter list items including filtergroup', async () => {
+      await sendMouse({ type: 'click', position: [10, 10] });
+      await sendKeys({ type: 'item3' });
+
+      await timeout(200);
+      await visualDiff(list, `action-list/filtergroup`);
+    });
+  });
 });

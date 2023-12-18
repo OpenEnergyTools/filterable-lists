@@ -2,6 +2,7 @@ import { css, html, LitElement, TemplateResult } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 
+import '@material/web/divider/divider';
 import '@material/web/icon/icon';
 import '@material/web/list/list';
 import '@material/web/list/list-item';
@@ -30,11 +31,21 @@ export type ActionItem = {
   startingIcon?: string;
   /** An icon rendered right to the list item content */
   endingIcon?: string;
+  /** Whether to add a divider at the bottom of the item  */
+  divider?: boolean;
+  /** Specifies additional filter terms */
+  filtergroup?: string[];
   /** The action to be performed when clicking the list item */
   primaryAction?: () => void;
   /** Additional actions for the item. The first rendered is visible */
   actions?: Action[];
 };
+
+function term(item: ActionItem): string {
+  return `${item.headline} ${item.supportingText ?? ''}${
+    item.filtergroup?.join(' ') ?? ''
+  }`;
+}
 
 @customElement('action-list')
 /** TextField designed to be used for SCL element */
@@ -54,9 +65,7 @@ export class ActionList extends FilterListBase {
           type="button"
           class="${classMap({
             twoline: !!item.supportingText,
-            hidden: !this.searchRegex.test(
-              `${item.headline} ${item.supportingText ?? ''}`
-            ),
+            hidden: !this.searchRegex.test(term(item)),
           })}"
           @click=${(evt: Event) => {
             const menu =
@@ -77,8 +86,12 @@ export class ActionList extends FilterListBase {
               <md-icon slot="start">${action.icon}</md-icon>
             </md-menu-item>`
           )}
-        </md-menu>
-      </span>
+        </md-menu> </span
+      >${item.divider
+        ? html`<md-divider
+            class="${classMap({ hidden: !this.searchRegex.test(term(item)) })}"
+          ></md-divider>`
+        : html``}
     `;
   }
 
@@ -87,26 +100,33 @@ export class ActionList extends FilterListBase {
 
     if (!action)
       return html` <md-list-item
-        class="${classMap({
-          twoline: !!item.supportingText,
-          hidden: !this.searchRegex.test(
-            `${item.headline} ${item.supportingText ?? ''}`
-          ),
-        })}"
-      ></md-list-item>`;
+          class="${classMap({
+            twoline: !!item.supportingText,
+            hidden: !this.searchRegex.test(term(item)),
+          })}"
+        ></md-list-item
+        >${item.divider
+          ? html`<md-divider
+              class="${classMap({
+                hidden: !this.searchRegex.test(term(item)),
+              })}"
+            ></md-divider>`
+          : html``}`;
 
     return html`<md-list-item
-      type="button"
-      class="${classMap({
-        twoline: !!item.supportingText,
-        hidden: !this.searchRegex.test(
-          `${item.headline} ${item.supportingText ?? ''}`
-        ),
-      })}"
-      @click=${action.callback}
-    >
-      <md-icon slot="start">${action.icon}</md-icon>
-    </md-list-item>`;
+        type="button"
+        class="${classMap({
+          twoline: !!item.supportingText,
+          hidden: !this.searchRegex.test(term(item)),
+        })}"
+        @click=${action.callback}
+      >
+        <md-icon slot="start">${action.icon}</md-icon> </md-list-item
+      >${item.divider
+        ? html`<md-divider
+            class="${classMap({ hidden: !this.searchRegex.test(term(item)) })}"
+          ></md-divider>`
+        : html``}`;
   }
 
   private renderOtherActions(): TemplateResult {
@@ -138,25 +158,27 @@ export class ActionList extends FilterListBase {
 
   private renderActionListItem(item: ActionItem): TemplateResult {
     return html`<md-list-item
-      type="${item.primaryAction ? 'link' : 'text'}"
-      class="${classMap({
-        hidden: !this.searchRegex.test(
-          `${item.headline} ${item.supportingText ?? ''}`
-        ),
-      })}"
-      @click="${item.primaryAction}"
-    >
-      <div slot="headline">${item.headline}</div>
-      ${item.supportingText
-        ? html`<div slot="headline">${item.supportingText}</div>`
-        : html``}
-      ${item.startingIcon
-        ? html`<md-icon slot="start">${item.startingIcon}</md-icon>`
-        : html``}
-      ${item.endingIcon
-        ? html`<md-icon slot="end">${item.endingIcon}</md-icon>`
-        : html``}
-    </md-list-item>`;
+        type="${item.primaryAction ? 'link' : 'text'}"
+        class="${classMap({
+          hidden: !this.searchRegex.test(term(item)),
+        })}"
+        @click="${item.primaryAction}"
+      >
+        <div slot="headline">${item.headline}</div>
+        ${item.supportingText
+          ? html`<div slot="headline">${item.supportingText}</div>`
+          : html``}
+        ${item.startingIcon
+          ? html`<md-icon slot="start">${item.startingIcon}</md-icon>`
+          : html``}
+        ${item.endingIcon
+          ? html`<md-icon slot="end">${item.endingIcon}</md-icon>`
+          : html``} </md-list-item
+      >${item.divider
+        ? html`<md-divider
+            class="${classMap({ hidden: !this.searchRegex.test(term(item)) })}"
+          ></md-divider>`
+        : html``}`;
   }
 
   private renderListItem(item: ActionItem): TemplateResult {
