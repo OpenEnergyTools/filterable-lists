@@ -38,7 +38,11 @@ function debounce(callback: any, delay = 100) {
 export class FilterListBase extends LitElement {
   /** Whether list items can be filtered on `headline` and `supportingText` */
   @property({ type: Boolean })
-  protected filterable = false;
+  filterable = false;
+
+  /** Placeholder for search input field */
+  @property({ type: String })
+  searchhelper = 'search';
 
   @state()
   protected searchRegex: RegExp = /.*/i;
@@ -53,7 +57,7 @@ export class FilterListBase extends LitElement {
   protected renderSearchField(): TemplateResult {
     return this.filterable
       ? html`<md-outlined-text-field
-          label="filter"
+          placeholder="${this.searchhelper}"
           @input="${debounce(() => this.onFilter())}"
         >
           <md-icon slot="leading-icon">search</md-icon></md-outlined-text-field

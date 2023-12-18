@@ -23,19 +23,20 @@ This element was meant to be used only for plugins in this organization. If it s
 
 #### Fields
 
-| Name    | Privacy | Type           | Default | Description             | Inherited From |
-| ------- | ------- | -------------- | ------- | ----------------------- | -------------- |
-| `items` |         | `ActionItem[]` | `[]`    | ListItems and potential |                |
+| Name           | Privacy | Type           | Default    | Description                                                               | Inherited From |
+| -------------- | ------- | -------------- | ---------- | ------------------------------------------------------------------------- | -------------- |
+| `items`        |         | `ActionItem[]` | `[]`       | ListItems and potential                                                   |                |
+| `filterable`   |         | `boolean`      | `false`    | Whether list items can be filtered on \`headline\` and \`supportingText\` | FilterListBase |
+| `searchhelper` |         | `string`       | `'search'` | Placeholder for search input field                                        | FilterListBase |
 
 <details><summary>Private API</summary>
 
 #### Fields
 
-| Name          | Privacy   | Type                     | Default | Description                                                               | Inherited From |
-| ------------- | --------- | ------------------------ | ------- | ------------------------------------------------------------------------- | -------------- |
-| `filterable`  | protected | `boolean`                | `false` | Whether list items can be filtered on \`headline\` and \`supportingText\` | FilterListBase |
-| `searchRegex` | protected | `RegExp`                 | `/.*/i` |                                                                           | FilterListBase |
-| `searchInput` | protected | `TextField \| undefined` |         |                                                                           | FilterListBase |
+| Name          | Privacy   | Type                     | Default | Description | Inherited From |
+| ------------- | --------- | ------------------------ | ------- | ----------- | -------------- |
+| `searchRegex` | protected | `RegExp`                 | `/.*/i` |             | FilterListBase |
+| `searchInput` | protected | `TextField \| undefined` |         |             | FilterListBase |
 
 #### Methods
 
@@ -71,15 +72,21 @@ This element was meant to be used only for plugins in this organization. If it s
 | ------------ | ------ | ------- |
 | `LitElement` |        | lit     |
 
+#### Fields
+
+| Name           | Privacy | Type      | Default    | Description                                                               | Inherited From |
+| -------------- | ------- | --------- | ---------- | ------------------------------------------------------------------------- | -------------- |
+| `filterable`   |         | `boolean` | `false`    | Whether list items can be filtered on \`headline\` and \`supportingText\` |                |
+| `searchhelper` |         | `string`  | `'search'` | Placeholder for search input field                                        |                |
+
 <details><summary>Private API</summary>
 
 #### Fields
 
-| Name          | Privacy   | Type                     | Default | Description                                                               | Inherited From |
-| ------------- | --------- | ------------------------ | ------- | ------------------------------------------------------------------------- | -------------- |
-| `filterable`  | protected | `boolean`                | `false` | Whether list items can be filtered on \`headline\` and \`supportingText\` |                |
-| `searchRegex` | protected | `RegExp`                 | `/.*/i` |                                                                           |                |
-| `searchInput` | protected | `TextField \| undefined` |         |                                                                           |                |
+| Name          | Privacy   | Type                     | Default | Description | Inherited From |
+| ------------- | --------- | ------------------------ | ------- | ----------- | -------------- |
+| `searchRegex` | protected | `RegExp`                 | `/.*/i` |             |                |
+| `searchInput` | protected | `TextField \| undefined` |         |             |                |
 
 #### Methods
 
@@ -110,20 +117,21 @@ This element was meant to be used only for plugins in this organization. If it s
 
 #### Fields
 
-| Name               | Privacy | Type           | Default | Description | Inherited From |
-| ------------------ | ------- | -------------- | ------- | ----------- | -------------- |
-| `items`            |         | `SelectItem[]` | `[]`    |             |                |
-| `selectedElements` |         | `Element[]`    |         |             |                |
+| Name               | Privacy | Type           | Default    | Description                                                               | Inherited From |
+| ------------------ | ------- | -------------- | ---------- | ------------------------------------------------------------------------- | -------------- |
+| `items`            |         | `SelectItem[]` | `[]`       |                                                                           |                |
+| `selectedElements` |         | `Element[]`    |            |                                                                           |                |
+| `filterable`       |         | `boolean`      | `false`    | Whether list items can be filtered on \`headline\` and \`supportingText\` | FilterListBase |
+| `searchhelper`     |         | `string`       | `'search'` | Placeholder for search input field                                        | FilterListBase |
 
 <details><summary>Private API</summary>
 
 #### Fields
 
-| Name          | Privacy   | Type                     | Default | Description                                                               | Inherited From |
-| ------------- | --------- | ------------------------ | ------- | ------------------------------------------------------------------------- | -------------- |
-| `filterable`  | protected | `boolean`                | `false` | Whether list items can be filtered on \`headline\` and \`supportingText\` | FilterListBase |
-| `searchRegex` | protected | `RegExp`                 | `/.*/i` |                                                                           | FilterListBase |
-| `searchInput` | protected | `TextField \| undefined` |         |                                                                           | FilterListBase |
+| Name          | Privacy   | Type                     | Default | Description | Inherited From |
+| ------------- | --------- | ------------------------ | ------- | ----------- | -------------- |
+| `searchRegex` | protected | `RegExp`                 | `/.*/i` |             | FilterListBase |
+| `searchInput` | protected | `TextField \| undefined` |         |             | FilterListBase |
 
 #### Methods
 
