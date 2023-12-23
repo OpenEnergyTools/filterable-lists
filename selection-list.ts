@@ -84,6 +84,7 @@ export class SelectionList extends FilterListBase {
     }
 
     md-outlined-text-field {
+      background-color: var(--md-sys-color-surface, #fef7ff);
       --md-outlined-text-field-container-shape: 32px;
     }
 
