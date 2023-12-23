@@ -206,6 +206,7 @@ export class ActionList extends FilterListBase {
     md-outlined-text-field {
       background-color: var(--md-sys-color-surface, #fef7ff);
       --md-outlined-text-field-container-shape: 32px;
+      padding: 8px;
     }
 
     md-list-item.twoline {
