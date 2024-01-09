@@ -215,6 +215,8 @@ export class ActionList extends FilterListBase {
 
     .listitems {
       flex: auto;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .hidden {

@@ -348,4 +348,42 @@ describe('Custom List component ActionList', () => {
       await visualDiff(list, `action-list/filtergroup`);
     });
   });
+
+  describe('for very long headline and supportingText', () => {
+    let list: ActionList;
+
+    beforeEach(async () => {
+      list = await fixture(
+        html`<action-list
+          .items=${[
+            {
+              headline: 'thiiiiiisisaveeeeeeeryloooongtitle',
+              divider: true,
+              filtergroup: ['item2', 'item3', 'item4', 'item5'],
+              primaryAction: () => {},
+              actions: [
+                { icon: 'edit', callback: () => {} },
+                { icon: 'delete', callback: () => {} },
+              ],
+            },
+            {
+              headline: 'thiiiiiisisanotherveeeeeeeryloooongtitle',
+              supportingText: 'thiiiiiiiisisaveeeeeeeerylongsupportingtitle',
+            },
+          ]}
+        ></action-list>`
+      );
+      list.style.width = '100px';
+      document.body.prepend(list);
+    });
+
+    afterEach(() => {
+      if (list) list.remove();
+    });
+
+    it('hide the overflow and ellipsis text', async () => {
+      await timeout(200);
+      await visualDiff(list, `action-list/long headline and supportingText `);
+    });
+  });
 });
