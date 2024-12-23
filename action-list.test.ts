@@ -386,4 +386,59 @@ describe('Custom List component ActionList', () => {
       await visualDiff(list, `action-list/long headline and supportingText `);
     });
   });
+
+  describe('for a custom size list item', () => {
+    let list: ActionList;
+
+    beforeEach(async () => {
+      list = await fixture(
+        html`<action-list
+          height="120"
+          .items=${[
+            {
+              headline: 'thiiiiiisisaveeeeeeeryloooongtitle',
+              divider: true,
+              filtergroup: ['item2', 'item3', 'item4', 'item5'],
+              primaryAction: () => {},
+              actions: [
+                { icon: 'edit', callback: () => {} },
+                { icon: 'delete', callback: () => {} },
+              ],
+            },
+            {
+              headline: 'thiiiiiisisanotherveeeeeeeryloooongtitle',
+              supportingText: 'thiiiiiiiisisaveeeeeeeerylongsupportingtitle',
+            },
+            {
+              headline:
+                'really long just doing its thing I guess this is how it is',
+              supportingText:
+                'thiiiiiiiisisaveeeeeeeerylongsupportingtitle > MoreStuff > AndStillMoreStuff',
+              divider: true,
+              filtergroup: ['item2', 'item3', 'item4', 'item5'],
+              primaryAction: () => {},
+              actions: [
+                { icon: 'edit', callback: () => {} },
+                { icon: 'delete', callback: () => {} },
+              ],
+            },
+          ]}
+        ></action-list>`
+      );
+      list.style.width = '100px';
+      document.body.prepend(list);
+    });
+
+    afterEach(() => {
+      if (list) list.remove();
+    });
+
+    it('produces correctly spaced list items', async () => {
+      await timeout(200);
+      await visualDiff(
+        list,
+        `action-list/long headline and supportingText with custom size`
+      );
+    });
+  });
 });

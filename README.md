@@ -26,6 +26,7 @@ This element was meant to be used only for plugins in this organization. If it s
 | Name           | Privacy | Type           | Default    | Description                                                               | Inherited From |
 | -------------- | ------- | -------------- | ---------- | ------------------------------------------------------------------------- | -------------- |
 | `items`        |         | `ActionItem[]` | `[]`       | ListItems and potential                                                   |                |
+| `height`       |         | `number`       | `72`       | Height of each list item                                                  |                |
 | `filterable`   |         | `boolean`      | `false`    | Whether list items can be filtered on \`headline\` and \`supportingText\` | FilterListBase |
 | `searchhelper` |         | `string`       | `'search'` | Placeholder for search input field                                        | FilterListBase |
 
