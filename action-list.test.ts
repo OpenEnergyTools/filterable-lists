@@ -413,7 +413,7 @@ describe('Custom List component ActionList', () => {
               headline:
                 'really long just doing its thing I guess this is how it is',
               supportingText:
-                'thiiiiiiiisisaveeeeeeeerylongsupportingtitle > MoreStuff > AndStillMoreStuff',
+                'thiiiiiiiisisaveeeeeeeerylongsupportingtitle > MoreStuff > AndStillMoreStuff > It gose on forever until we cannot bear it any moer and eventually we reach our limit and then we truncate it! ',
               divider: true,
               filtergroup: ['item2', 'item3', 'item4', 'item5'],
               primaryAction: () => {},

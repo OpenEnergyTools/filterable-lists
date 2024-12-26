@@ -163,6 +163,8 @@ export class ActionList extends FilterListBase {
         class="${classMap({
           hidden: !this.searchRegex.test(term(item)),
         })}"
+        title="${item.headline ?? ''}
+${item.headline && item.supportingText ? '-' : ''}${item.supportingText}"
         @click="${item.primaryAction}"
       >
         <div slot="headline" class="firstLine">${item.headline}</div>
@@ -191,6 +193,9 @@ export class ActionList extends FilterListBase {
         md-list-item {
           height: ${this.height}px;
         }
+        [slot='supporting-text'] {
+          max-height: ${this.height - 24}px;
+        }
       </style>
       <section>
         ${this.renderSearchField()}
@@ -218,6 +223,12 @@ export class ActionList extends FilterListBase {
 
     [slot='headline'] {
       white-space: pre;
+    }
+
+    [slot='supporting-text'] {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: normal;
     }
 
     :host {
