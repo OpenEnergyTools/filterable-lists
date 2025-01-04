@@ -21,6 +21,20 @@ This element was meant to be used only for plugins in this organization. If it s
 | ---------------- | ------------- | ------- |
 | `FilterListBase` | /base-list.js |         |
 
+#### Static Fields
+
+| Name             | Privacy | Type     | Default                                                                                                                                                                                                                     | Description | Inherited From |
+| ---------------- | ------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | -------------- |
+| `scopedElements` |         | `object` | `{
+    'md-outlined-text-field': MdOutlinedTextField,
+    'md-icon': MdIcon,
+    'md-list': MdList,
+    'md-list-item': MdListItem,
+    'md-divider': MdDivider,
+    'md-menu': MdMenu,
+    'md-menuItem': MdMenuItem,
+  }` |             |                |
+
 #### Fields
 
 | Name           | Privacy | Type           | Default    | Description                                                               | Inherited From |
@@ -72,6 +86,12 @@ This element was meant to be used only for plugins in this organization. If it s
 | ------------ | ------ | ------- |
 | `LitElement` |        | lit     |
 
+#### Mixins
+
+| Name                  | Module | Package                                 |
+| --------------------- | ------ | --------------------------------------- |
+| `ScopedElementsMixin` |        | @open-wc/scoped-elements/lit-element.js |
+
 #### Fields
 
 | Name           | Privacy | Type      | Default    | Description                                                               | Inherited From |
@@ -114,6 +134,18 @@ This element was meant to be used only for plugins in this organization. If it s
 | Name             | Module        | Package |
 | ---------------- | ------------- | ------- |
 | `FilterListBase` | /base-list.js |         |
+
+#### Static Fields
+
+| Name             | Privacy | Type     | Default                                                                                                                                                                 | Description | Inherited From |
+| ---------------- | ------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | -------------- |
+| `scopedElements` |         | `object` | `{
+    'md-outlined-text-field': MdOutlinedTextField,
+    'md-icon': MdIcon,
+    'md-list': MdList,
+    'md-list-item': MdListItem,
+    'md-checkbox': MdCheckbox,
+  }` |             |                |
 
 #### Fields
 

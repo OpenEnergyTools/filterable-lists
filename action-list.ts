@@ -1,16 +1,15 @@
-import { css, html, LitElement, TemplateResult } from 'lit';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import { css, html, TemplateResult } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 
-import '@material/web/divider/divider';
-import '@material/web/icon/icon';
-import '@material/web/list/list';
-import '@material/web/list/list-item';
-import '@material/web/menu/menu';
-import '@material/web/menu/menu-item';
-import '@material/web/textfield/outlined-text-field';
-import { Icon } from '@material/web/icon/internal/icon.js';
-import type { Menu } from '@material/web/menu/menu.js';
+import { MdMenu, Menu } from '@scopedelement/material-web/menu/MdMenu.js';
+import { Icon } from '@scopedelement/material-web/icon/internal/icon.js';
+import { MdDivider } from '@scopedelement/material-web/divider/MdDevider.js';
+import { MdIcon } from '@scopedelement/material-web/icon/MdIcon.js';
+import { MdList } from '@scopedelement/material-web/list/MdList.js';
+import { MdListItem } from '@scopedelement/material-web/list/MdListItem.js';
+import { MdMenuItem } from '@scopedelement/material-web/menu/MdMenuItem.js';
+import { MdOutlinedTextField } from '@scopedelement/material-web/textfield/MdOutlinedTextField.js';
 
 import { FilterListBase } from './base-list.js';
 
@@ -50,6 +49,16 @@ function term(item: ActionItem): string {
 @customElement('action-list')
 /** TextField designed to be used for SCL element */
 export class ActionList extends FilterListBase {
+  static scopedElements = {
+    'md-outlined-text-field': MdOutlinedTextField,
+    'md-icon': MdIcon,
+    'md-list': MdList,
+    'md-list-item': MdListItem,
+    'md-divider': MdDivider,
+    'md-menu': MdMenu,
+    'md-menuItem': MdMenuItem,
+  };
+
   /** ListItems and potential */
   @property({ type: Array })
   items: ActionItem[] = [];

@@ -2,10 +2,12 @@ import { css, html, TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 
-import '@material/web/checkbox/checkbox';
-import '@material/web/icon/icon';
-import '@material/web/list/list';
-import '@material/web/list/list-item';
+import { MdCheckbox } from '@scopedelement/material-web/checkbox/MdCheckbox.js';
+import { MdIcon } from '@scopedelement/material-web/icon/MdIcon.js';
+import { MdList } from '@scopedelement/material-web/list/MdList.js';
+import { MdListItem } from '@scopedelement/material-web/list/MdListItem.js';
+import { MdOutlinedTextField } from '@scopedelement/material-web/textfield/MdOutlinedTextField.js';
+
 import { FilterListBase } from './base-list.js';
 
 export type SelectItem = {
@@ -24,6 +26,14 @@ export type SelectItem = {
 @customElement('selection-list')
 /** List component to select from a set of options */
 export class SelectionList extends FilterListBase {
+  static scopedElements = {
+    'md-outlined-text-field': MdOutlinedTextField,
+    'md-icon': MdIcon,
+    'md-list': MdList,
+    'md-list-item': MdListItem,
+    'md-checkbox': MdCheckbox,
+  };
+
   @property({ type: Array })
   items: SelectItem[] = [];
 
