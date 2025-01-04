@@ -56,7 +56,7 @@ export class ActionList extends FilterListBase {
     'md-list-item': MdListItem,
     'md-divider': MdDivider,
     'md-menu': MdMenu,
-    'md-menuItem': MdMenuItem,
+    'md-menu-item': MdMenuItem,
   };
 
   /** ListItems and potential */
