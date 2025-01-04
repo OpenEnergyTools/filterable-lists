@@ -8,7 +8,7 @@ import { visualDiff } from '@web/test-runner-visual-regression';
 import './action-list.js';
 import type { ActionItem, ActionList } from './action-list.js';
 
-const factor = window.process && process.env.CI ? 5 : 3;
+const factor = window.process && process.env.CI ? 6 : 3;
 function timeout(ms: number) {
   return new Promise(res => {
     setTimeout(res, ms * factor);
