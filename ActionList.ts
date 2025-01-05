@@ -239,12 +239,6 @@ ${item.headline && item.supportingText ? '-' : ''}${item.supportingText}"
       white-space: normal;
     }
 
-    :host {
-      --md-sys-color-surface: var(--oscd-base3);
-      --md-sys-color-on-surface: var(--oscd-base00);
-      --md-sys-color-on-surface-variant: var(--oscd-base0);
-    }
-
     .listitems {
       flex: auto;
       overflow: hidden;
