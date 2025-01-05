@@ -2,8 +2,9 @@
 import { html, LitElement, TemplateResult } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
 
-import '@material/web/textfield/outlined-text-field';
-import { TextField } from '@material/web/textfield/internal/text-field';
+import { ScopedElementsMixin } from '@open-wc/scoped-elements/lit-element.js';
+
+import { TextField } from '@scopedelement/material-web/textfield/internal/text-field';
 
 function searchRegex(filter?: string): RegExp {
   if (!filter) return /.*/i;
@@ -35,7 +36,7 @@ function debounce(callback: any, delay = 100) {
 }
 
 // Base class for all filterable list components
-export class FilterListBase extends LitElement {
+export class FilterListBase extends ScopedElementsMixin(LitElement) {
   /** Whether list items can be filtered on `headline` and `supportingText` */
   @property({ type: Boolean })
   filterable = false;
