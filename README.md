@@ -11,15 +11,29 @@ This is a specialized list allowing you to defined various kinds of actions on l
 This element was meant to be used only for plugins in this organization. If it still fills you bill please use or re-use it. But be aware that we will not react on feature wishes that do not contribute to the needs of plugin in this organization.
 
 
-## `action-list.ts`:
+## `ActionList.ts`:
 
-### class: `ActionList`
+### class: `ActionList`, `action-list`
 
 #### Superclass
 
 | Name             | Module        | Package |
 | ---------------- | ------------- | ------- |
 | `FilterListBase` | /base-list.js |         |
+
+#### Static Fields
+
+| Name             | Privacy | Type     | Default                                                                                                                                                                                                                      | Description | Inherited From |
+| ---------------- | ------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | -------------- |
+| `scopedElements` |         | `object` | `{
+    'md-outlined-text-field': MdOutlinedTextField,
+    'md-icon': MdIcon,
+    'md-list': MdList,
+    'md-list-item': MdListItem,
+    'md-divider': MdDivider,
+    'md-menu': MdMenu,
+    'md-menu-item': MdMenuItem,
+  }` |             |                |
 
 #### Fields
 
@@ -58,9 +72,76 @@ This element was meant to be used only for plugins in this organization. If it s
 
 ### Exports
 
-| Kind | Name         | Declaration | Module         | Package |
-| ---- | ------------ | ----------- | -------------- | ------- |
-| `js` | `ActionList` | ActionList  | action-list.ts |         |
+| Kind | Name         | Declaration | Module        | Package |
+| ---- | ------------ | ----------- | ------------- | ------- |
+| `js` | `ActionList` | ActionList  | ActionList.ts |         |
+
+## `SelectionList.ts`:
+
+### class: `SelectionList`, `selection-list`
+
+#### Superclass
+
+| Name             | Module        | Package |
+| ---------------- | ------------- | ------- |
+| `FilterListBase` | /base-list.js |         |
+
+#### Static Fields
+
+| Name             | Privacy | Type     | Default                                                                                                                                                                 | Description | Inherited From |
+| ---------------- | ------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | -------------- |
+| `scopedElements` |         | `object` | `{
+    'md-outlined-text-field': MdOutlinedTextField,
+    'md-icon': MdIcon,
+    'md-list': MdList,
+    'md-list-item': MdListItem,
+    'md-checkbox': MdCheckbox,
+  }` |             |                |
+
+#### Fields
+
+| Name               | Privacy | Type           | Default    | Description                                                               | Inherited From |
+| ------------------ | ------- | -------------- | ---------- | ------------------------------------------------------------------------- | -------------- |
+| `items`            |         | `SelectItem[]` | `[]`       |                                                                           |                |
+| `selectedElements` |         | `Element[]`    |            |                                                                           |                |
+| `filterable`       |         | `boolean`      | `false`    | Whether list items can be filtered on \`headline\` and \`supportingText\` | FilterListBase |
+| `searchhelper`     |         | `string`       | `'search'` | Placeholder for search input field                                        | FilterListBase |
+
+<details><summary>Private API</summary>
+
+#### Fields
+
+| Name          | Privacy   | Type                     | Default | Description | Inherited From |
+| ------------- | --------- | ------------------------ | ------- | ----------- | -------------- |
+| `searchRegex` | protected | `RegExp`                 | `/.*/i` |             | FilterListBase |
+| `searchInput` | protected | `TextField \| undefined` |         |             | FilterListBase |
+
+#### Methods
+
+| Name                     | Privacy   | Description | Parameters         | Return           | Inherited From |
+| ------------------------ | --------- | ----------- | ------------------ | ---------------- | -------------- |
+| `renderCheckboxListItem` | private   |             | `item: SelectItem` | `TemplateResult` |                |
+| `renderListItem`         | private   |             | `item: SelectItem` | `TemplateResult` |                |
+| `onFilter`               | protected |             |                    | `void`           | FilterListBase |
+| `renderSearchField`      | protected |             |                    | `TemplateResult` | FilterListBase |
+
+</details>
+
+<hr/>
+
+### Exports
+
+| Kind | Name            | Declaration   | Module           | Package |
+| ---- | --------------- | ------------- | ---------------- | ------- |
+| `js` | `SelectionList` | SelectionList | SelectionList.ts |         |
+
+## `action-list.ts`:
+
+### Exports
+
+| Kind                        | Name          | Declaration | Module         | Package |
+| --------------------------- | ------------- | ----------- | -------------- | ------- |
+| `custom-element-definition` | `action-list` | ActionList  | /ActionList.js |         |
 
 ## `base-list.ts`:
 
@@ -71,6 +152,12 @@ This element was meant to be used only for plugins in this organization. If it s
 | Name         | Module | Package |
 | ------------ | ------ | ------- |
 | `LitElement` |        | lit     |
+
+#### Mixins
+
+| Name                  | Module | Package                                 |
+| --------------------- | ------ | --------------------------------------- |
+| `ScopedElementsMixin` |        | @open-wc/scoped-elements/lit-element.js |
 
 #### Fields
 
@@ -107,50 +194,11 @@ This element was meant to be used only for plugins in this organization. If it s
 
 ## `selection-list.ts`:
 
-### class: `SelectionList`
-
-#### Superclass
-
-| Name             | Module        | Package |
-| ---------------- | ------------- | ------- |
-| `FilterListBase` | /base-list.js |         |
-
-#### Fields
-
-| Name               | Privacy | Type           | Default    | Description                                                               | Inherited From |
-| ------------------ | ------- | -------------- | ---------- | ------------------------------------------------------------------------- | -------------- |
-| `items`            |         | `SelectItem[]` | `[]`       |                                                                           |                |
-| `selectedElements` |         | `Element[]`    |            |                                                                           |                |
-| `filterable`       |         | `boolean`      | `false`    | Whether list items can be filtered on \`headline\` and \`supportingText\` | FilterListBase |
-| `searchhelper`     |         | `string`       | `'search'` | Placeholder for search input field                                        | FilterListBase |
-
-<details><summary>Private API</summary>
-
-#### Fields
-
-| Name          | Privacy   | Type                     | Default | Description | Inherited From |
-| ------------- | --------- | ------------------------ | ------- | ----------- | -------------- |
-| `searchRegex` | protected | `RegExp`                 | `/.*/i` |             | FilterListBase |
-| `searchInput` | protected | `TextField \| undefined` |         |             | FilterListBase |
-
-#### Methods
-
-| Name                     | Privacy   | Description | Parameters         | Return           | Inherited From |
-| ------------------------ | --------- | ----------- | ------------------ | ---------------- | -------------- |
-| `renderCheckboxListItem` | private   |             | `item: SelectItem` | `TemplateResult` |                |
-| `renderListItem`         | private   |             | `item: SelectItem` | `TemplateResult` |                |
-| `onFilter`               | protected |             |                    | `void`           | FilterListBase |
-| `renderSearchField`      | protected |             |                    | `TemplateResult` | FilterListBase |
-
-</details>
-
-<hr/>
-
 ### Exports
 
-| Kind | Name            | Declaration   | Module            | Package |
-| ---- | --------------- | ------------- | ----------------- | ------- |
-| `js` | `SelectionList` | SelectionList | selection-list.ts |         |
+| Kind                        | Name             | Declaration   | Module            | Package |
+| --------------------------- | ---------------- | ------------- | ----------------- | ------- |
+| `custom-element-definition` | `selection-list` | SelectionList | /SelectionList.js |         |
 
 
 &copy; 2023 The Contributors

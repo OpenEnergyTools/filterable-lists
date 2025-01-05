@@ -4,7 +4,7 @@ import { sendMouse } from '@web/test-runner-commands';
 import { spy } from 'sinon';
 
 import './action-list.js';
-import type { ActionList } from './action-list.js';
+import type { ActionList } from './ActionList.js';
 
 function timeout(ms: number) {
   return new Promise(res => {

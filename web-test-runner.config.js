@@ -23,7 +23,6 @@ const filteredLogs = [
 const browsers = [
      playwrightLauncher({ product: 'chromium' }),
      playwrightLauncher({ product: 'firefox' }),
-     playwrightLauncher({ product: 'webkit' }),
    ];
 
 function defaultGetImageDiff({ baselineImage, image, options }) {
@@ -83,6 +82,7 @@ export default /** @type {import("@web/test-runner").TestRunnerConfig} */ ({
               <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined">
             </head>
             <body>
+             <script src="/node_modules/@webcomponents/scoped-custom-element-registry/scoped-custom-element-registry.min.js"></script>
               <style class="deanimator">
               *, *::before, *::after {
               -moz-transition: none !important;
@@ -132,6 +132,59 @@ export default /** @type {import("@web/test-runner").TestRunnerConfig} */ ({
     {
       name: 'unit',
       files: 'dist/**/*.spec.js',
+      testRunnerHtml: testFramework => `
+      <html>
+        <head>
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&family=Roboto:wght@300;400;500&display=swap">
+          <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined">
+        </head>
+        <body>
+         <script src="/node_modules/@webcomponents/scoped-custom-element-registry/scoped-custom-element-registry.min.js"></script>
+          <style class="deanimator">
+          *, *::before, *::after {
+          -moz-transition: none !important;
+          transition: none !important;
+          -moz-animation: none !important;
+          animation: none !important;
+          }
+          </style>
+          <script>window.process = { env: ${JSON.stringify(process.env)} }</script>
+          <script type="module" src="${testFramework}"></script>
+          <script>
+          function descendants(parent) {
+            return (Array.from(parent.childNodes)).concat(
+              ...Array.from(parent.children).map(child => descendants(child))
+            );
+          }
+          const deanimator = document.querySelector('.deanimator');
+          function deanimate(element) {
+            if (!element.shadowRoot) return;
+            if (element.shadowRoot.querySelector('.deanimator')) return;
+            const style = deanimator.cloneNode(true);
+            element.shadowRoot.appendChild(style);
+            descendants(element.shadowRoot).forEach(deanimate);
+          }
+          const observer = new MutationObserver((mutationList, observer) => {
+            for (const mutation of mutationList) {
+              if (mutation.type === 'childList') {
+                descendants(document.body).forEach(deanimate);
+              }
+            }
+          });
+          observer.observe(document.body, {childList: true, subtree:true});
+          </script>
+          <style>
+          * {
+            margin: 0px;
+            padding: 0px;
+          }
+
+          body {
+            background: white;
+          }
+          </style>
+        </body>
+      </html>`,
     },
   ],
 

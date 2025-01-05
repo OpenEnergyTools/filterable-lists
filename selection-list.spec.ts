@@ -4,7 +4,7 @@ import { expect, fixture, html } from '@open-wc/testing';
 import { sendMouse } from '@web/test-runner-commands';
 
 import './selection-list.js';
-import type { SelectionList, SelectItem } from './selection-list.js';
+import type { SelectionList, SelectItem } from './SelectionList.js';
 
 const factor = window.process && process.env.CI ? 5 : 3;
 function timeout(ms: number) {

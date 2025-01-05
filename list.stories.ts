@@ -2,8 +2,8 @@ import { html, TemplateResult } from 'lit';
 
 import './action-list.js';
 import './selection-list.js';
-import type { ActionItem } from './action-list.js';
-import type { SelectItem } from './selection-list.js';
+import type { ActionItem } from './ActionList.js';
+import type { SelectItem } from './SelectionList.js';
 
 export default {
   title: 'filtered-list-components',
