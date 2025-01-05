@@ -23,8 +23,8 @@ This element was meant to be used only for plugins in this organization. If it s
 
 #### Static Fields
 
-| Name             | Privacy | Type     | Default                                                                                                                                                                                                                     | Description | Inherited From |
-| ---------------- | ------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | -------------- |
+| Name             | Privacy | Type     | Default                                                                                                                                                                                                                      | Description | Inherited From |
+| ---------------- | ------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | -------------- |
 | `scopedElements` |         | `object` | `{
     'md-outlined-text-field': MdOutlinedTextField,
     'md-icon': MdIcon,
@@ -32,7 +32,7 @@ This element was meant to be used only for plugins in this organization. If it s
     'md-list-item': MdListItem,
     'md-divider': MdDivider,
     'md-menu': MdMenu,
-    'md-menuItem': MdMenuItem,
+    'md-menu-item': MdMenuItem,
   }` |             |                |
 
 #### Fields
