@@ -106,6 +106,8 @@ ActionLessList.args = {
       primaryAction: () => {
         window.alert('clicked');
       },
+      supportingText:
+        'a veeeeeeeery veeeeeeeery loooooooong suporting text with empty spaces which just gets longer and longer until we cannot bear it and something will break if we do not truncate it!',
     },
     {
       headline: 'item3',

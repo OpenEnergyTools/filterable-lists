@@ -62,6 +62,10 @@ export class ActionList extends FilterListBase {
   @property({ type: Array })
   items: ActionItem[] = [];
 
+  /** Height of each list item */
+  @property({ type: Number })
+  height: number = 72;
+
   private renderMoreVertItem(item: ActionItem): TemplateResult {
     item.actions!.shift();
     const otherActions = item.actions!;
@@ -72,7 +76,6 @@ export class ActionList extends FilterListBase {
           id="more-vert-anchor"
           type="button"
           class="${classMap({
-            twoline: !!item.supportingText,
             hidden: !this.searchRegex.test(term(item)),
           })}"
           @click=${(evt: Event) => {
@@ -107,9 +110,8 @@ export class ActionList extends FilterListBase {
     const action = item.actions ? item.actions[index] : null;
 
     if (!action)
-      return html` <md-list-item
+      return html`<md-list-item
           class="${classMap({
-            twoline: !!item.supportingText,
             hidden: !this.searchRegex.test(term(item)),
           })}"
         ></md-list-item
@@ -124,7 +126,6 @@ export class ActionList extends FilterListBase {
     return html`<md-list-item
         type="button"
         class="${classMap({
-          twoline: !!item.supportingText,
           hidden: !this.searchRegex.test(term(item)),
         })}"
         @click=${action.callback}
@@ -170,11 +171,13 @@ export class ActionList extends FilterListBase {
         class="${classMap({
           hidden: !this.searchRegex.test(term(item)),
         })}"
+        title="${item.headline ?? ''}
+${item.headline && item.supportingText ? '-' : ''}${item.supportingText}"
         @click="${item.primaryAction}"
       >
-        <div slot="headline">${item.headline}</div>
+        <div slot="headline" class="firstLine">${item.headline}</div>
         ${item.supportingText
-          ? html`<div slot="headline">${item.supportingText}</div>`
+          ? html`<div slot="supporting-text">${item.supportingText}</div>`
           : html``}
         ${item.startingIcon
           ? html`<md-icon slot="start">${item.startingIcon}</md-icon>`
@@ -194,21 +197,30 @@ export class ActionList extends FilterListBase {
   }
 
   render(): TemplateResult {
-    return html`<section>
-      ${this.renderSearchField()}
-      <div style="display: flex;">
-        <md-list class="listitems">
-          ${this.items.map(item => this.renderListItem(item))}</md-list
-        >
-        ${this.renderActions()}
-      </div>
-    </section>`;
+    return html`<style>
+        md-list-item {
+          height: ${this.height}px;
+        }
+        [slot='supporting-text'] {
+          max-height: ${this.height - 24}px;
+        }
+      </style>
+      <section>
+        ${this.renderSearchField()}
+        <div style="display: flex;">
+          <md-list class="listitems">
+            ${this.items.map(item => this.renderListItem(item))}</md-list
+          >
+          ${this.renderActions()}
+        </div>
+      </section>`;
   }
 
   static styles = css`
     section {
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
     }
 
     md-outlined-text-field {
@@ -217,8 +229,14 @@ export class ActionList extends FilterListBase {
       padding: 8px;
     }
 
-    md-list-item.twoline {
-      height: 72px;
+    [slot='headline'] {
+      white-space: pre;
+    }
+
+    [slot='supporting-text'] {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: normal;
     }
 
     .listitems {
