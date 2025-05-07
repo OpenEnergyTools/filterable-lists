@@ -47,6 +47,7 @@ const attachedItems: SelectItem[] = gseControls.map(gseControl => ({
   supportingText: gseControl.getAttribute('desc') ?? undefined,
   attachedElement: gseControl,
   selected: gseControl.getAttribute('name') === 'gse4',
+  disabled: gseControl.getAttribute('name') === 'gse1',
 }));
 
 describe('Custom List component SelectionList', () => {
@@ -74,6 +75,8 @@ describe('Custom List component SelectionList', () => {
 
     it('return non empty array', async () => {
       await sendMouse({ type: 'click', position: [360, 30] });
+      await sendMouse({ type: 'click', position: [360, 90] });
+      // await sendMouse({ type: 'click', position: [360, 30] });
 
       expect(list.selectedElements.length).to.equal(2);
       expect(list.selectedElements[0].getAttribute('name')).to.equal('gse0');
