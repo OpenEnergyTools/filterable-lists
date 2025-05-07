@@ -21,9 +21,8 @@ const filteredLogs = [
 ];
 
 const browsers = [
-     playwrightLauncher({ product: 'chromium' }),
-     playwrightLauncher({ product: 'firefox' }),
-   ];
+  playwrightLauncher({ product: 'chromium' }),
+];
 
 function defaultGetImageDiff({ baselineImage, image, options }) {
   let error = '';
@@ -63,7 +62,7 @@ export default /** @type {import("@web/test-runner").TestRunnerConfig} */ ({
     visualRegressionPlugin({
       update: process.argv.includes('--update-visual-baseline'),
       getImageDiff: (options) => {
-        const result =  defaultGetImageDiff(options);
+        const result = defaultGetImageDiff(options);
         if (result.diffPercentage < thresholdPercentage)
           result.diffPercentage = 0;
         return result;

@@ -21,6 +21,8 @@ export type SelectItem = {
   startingIcon?: string;
   /** Whether an icon is selected */
   selected: boolean;
+  /** wether an item shall be display but disabled */
+  disabled?: boolean;
 };
 
 /** List component to select from a set of options */
@@ -63,6 +65,7 @@ export class SelectionList extends FilterListBase {
       <md-checkbox
         slot="end"
         ?checked=${item.selected}
+        ?disabled=${item.disabled}
         @change="${() => {
           // eslint-disable-next-line no-param-reassign
           item.selected = !item.selected;
