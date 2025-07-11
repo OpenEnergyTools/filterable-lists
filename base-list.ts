@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { html, LitElement, TemplateResult } from 'lit';
-import { property, query, state } from 'lit/decorators.js';
+import { property, query } from 'lit/decorators.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 
 import { ScopedElementsMixin } from '@open-wc/scoped-elements/lit-element.js';
 
@@ -45,20 +46,40 @@ export class FilterListBase extends ScopedElementsMixin(LitElement) {
   @property({ type: String })
   searchhelper = 'search';
 
-  @state()
-  protected searchRegex: RegExp = /.*/i;
+  /** Search/filter value. If set, component is controlled and emits 'search-change' on update. */
+  @property({ type: String })
+  searchValue?: string;
 
   @query('md-outlined-text-field')
   protected searchInput?: TextField;
 
+  protected get searchRegex(): RegExp {
+    const filterValue =
+      this.searchValue !== undefined
+        ? this.searchValue
+        : this.searchInput?.value ?? '';
+    return searchRegex(filterValue);
+  }
+
   protected onFilter(): void {
-    this.searchRegex = searchRegex(this.searchInput?.value);
+    if (this.searchValue !== undefined) {
+      const newValue = this.searchInput?.value ?? '';
+      this.dispatchEvent(
+        new CustomEvent('search-change', {
+          detail: { value: newValue },
+          bubbles: true,
+        })
+      );
+    } else {
+      this.requestUpdate();
+    }
   }
 
   protected renderSearchField(): TemplateResult {
     return this.filterable
       ? html`<md-outlined-text-field
           placeholder="${this.searchhelper}"
+          .value="${ifDefined(this.searchValue)}"
           @input="${debounce(() => this.onFilter())}"
         >
           <md-icon slot="leading-icon">search</md-icon></md-outlined-text-field

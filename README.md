@@ -37,12 +37,19 @@ This element was meant to be used only for plugins in this organization. If it s
 
 #### Fields
 
-| Name           | Privacy | Type           | Default    | Description                                                               | Inherited From |
-| -------------- | ------- | -------------- | ---------- | ------------------------------------------------------------------------- | -------------- |
-| `items`        |         | `ActionItem[]` | `[]`       | ListItems and potential                                                   |                |
-| `height`       |         | `number`       | `72`       | Height of each list item                                                  |                |
-| `filterable`   |         | `boolean`      | `false`    | Whether list items can be filtered on \`headline\` and \`supportingText\` | FilterListBase |
-| `searchhelper` |         | `string`       | `'search'` | Placeholder for search input field                                        | FilterListBase |
+| Name           | Privacy | Type                  | Default    | Description                                                                               | Inherited From |
+| -------------- | ------- | --------------------- | ---------- | ----------------------------------------------------------------------------------------- | -------------- |
+| `items`        |         | `ActionItem[]`        | `[]`       | ListItems and potential                                                                   |                |
+| `height`       |         | `number`              | `72`       | Height of each list item                                                                  |                |
+| `filterable`   |         | `boolean`             | `false`    | Whether list items can be filtered on \`headline\` and \`supportingText\`                 | FilterListBase |
+| `searchhelper` |         | `string`              | `'search'` | Placeholder for search input field                                                        | FilterListBase |
+| `searchValue`  |         | `string \| undefined` |            | Search/filter value. If set, component is controlled and emits 'search-change' on update. | FilterListBase |
+
+#### Events
+
+| Name            | Type          | Description | Inherited From |
+| --------------- | ------------- | ----------- | -------------- |
+| `search-change` | `CustomEvent` |             | FilterListBase |
 
 <details><summary>Private API</summary>
 
@@ -50,8 +57,8 @@ This element was meant to be used only for plugins in this organization. If it s
 
 | Name          | Privacy   | Type                     | Default | Description | Inherited From |
 | ------------- | --------- | ------------------------ | ------- | ----------- | -------------- |
-| `searchRegex` | protected | `RegExp`                 | `/.*/i` |             | FilterListBase |
 | `searchInput` | protected | `TextField \| undefined` |         |             | FilterListBase |
+| `searchRegex` | protected | `RegExp`                 |         |             | FilterListBase |
 
 #### Methods
 
@@ -101,12 +108,19 @@ This element was meant to be used only for plugins in this organization. If it s
 
 #### Fields
 
-| Name               | Privacy | Type           | Default    | Description                                                               | Inherited From |
-| ------------------ | ------- | -------------- | ---------- | ------------------------------------------------------------------------- | -------------- |
-| `items`            |         | `SelectItem[]` | `[]`       |                                                                           |                |
-| `selectedElements` |         | `Element[]`    |            |                                                                           |                |
-| `filterable`       |         | `boolean`      | `false`    | Whether list items can be filtered on \`headline\` and \`supportingText\` | FilterListBase |
-| `searchhelper`     |         | `string`       | `'search'` | Placeholder for search input field                                        | FilterListBase |
+| Name               | Privacy | Type                  | Default    | Description                                                                               | Inherited From |
+| ------------------ | ------- | --------------------- | ---------- | ----------------------------------------------------------------------------------------- | -------------- |
+| `items`            |         | `SelectItem[]`        | `[]`       |                                                                                           |                |
+| `selectedElements` |         | `Element[]`           |            |                                                                                           |                |
+| `filterable`       |         | `boolean`             | `false`    | Whether list items can be filtered on \`headline\` and \`supportingText\`                 | FilterListBase |
+| `searchhelper`     |         | `string`              | `'search'` | Placeholder for search input field                                                        | FilterListBase |
+| `searchValue`      |         | `string \| undefined` |            | Search/filter value. If set, component is controlled and emits 'search-change' on update. | FilterListBase |
+
+#### Events
+
+| Name            | Type          | Description | Inherited From |
+| --------------- | ------------- | ----------- | -------------- |
+| `search-change` | `CustomEvent` |             | FilterListBase |
 
 <details><summary>Private API</summary>
 
@@ -114,8 +128,8 @@ This element was meant to be used only for plugins in this organization. If it s
 
 | Name          | Privacy   | Type                     | Default | Description | Inherited From |
 | ------------- | --------- | ------------------------ | ------- | ----------- | -------------- |
-| `searchRegex` | protected | `RegExp`                 | `/.*/i` |             | FilterListBase |
 | `searchInput` | protected | `TextField \| undefined` |         |             | FilterListBase |
+| `searchRegex` | protected | `RegExp`                 |         |             | FilterListBase |
 
 #### Methods
 
@@ -162,10 +176,17 @@ This element was meant to be used only for plugins in this organization. If it s
 
 #### Fields
 
-| Name           | Privacy | Type      | Default    | Description                                                               | Inherited From |
-| -------------- | ------- | --------- | ---------- | ------------------------------------------------------------------------- | -------------- |
-| `filterable`   |         | `boolean` | `false`    | Whether list items can be filtered on \`headline\` and \`supportingText\` |                |
-| `searchhelper` |         | `string`  | `'search'` | Placeholder for search input field                                        |                |
+| Name           | Privacy | Type                  | Default    | Description                                                                               | Inherited From |
+| -------------- | ------- | --------------------- | ---------- | ----------------------------------------------------------------------------------------- | -------------- |
+| `filterable`   |         | `boolean`             | `false`    | Whether list items can be filtered on \`headline\` and \`supportingText\`                 |                |
+| `searchhelper` |         | `string`              | `'search'` | Placeholder for search input field                                                        |                |
+| `searchValue`  |         | `string \| undefined` |            | Search/filter value. If set, component is controlled and emits 'search-change' on update. |                |
+
+#### Events
+
+| Name            | Type          | Description | Inherited From |
+| --------------- | ------------- | ----------- | -------------- |
+| `search-change` | `CustomEvent` |             |                |
 
 <details><summary>Private API</summary>
 
@@ -173,8 +194,8 @@ This element was meant to be used only for plugins in this organization. If it s
 
 | Name          | Privacy   | Type                     | Default | Description | Inherited From |
 | ------------- | --------- | ------------------------ | ------- | ----------- | -------------- |
-| `searchRegex` | protected | `RegExp`                 | `/.*/i` |             |                |
 | `searchInput` | protected | `TextField \| undefined` |         |             |                |
+| `searchRegex` | protected | `RegExp`                 |         |             |                |
 
 #### Methods
 
