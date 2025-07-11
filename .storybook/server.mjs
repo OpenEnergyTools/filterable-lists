@@ -5,8 +5,11 @@ import { polyfill } from '@web/dev-server-polyfill';
 export default /** @type {import('@web/dev-server').DevServerConfig} */ ({
   ...baseConfig,
   open: '/',
-  plugins: [storybookPlugin(
+  plugins: [
+    storybookPlugin({ type: 'web-components' }),
     polyfill({
       scopedCustomElementRegistry: true,
-    }),{ type: 'web-components' }), ...baseConfig.plugins],
+    }),
+    ...baseConfig.plugins
+  ],
 });
