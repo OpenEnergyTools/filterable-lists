@@ -1,7 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable no-unused-expressions */
 
 import { expect, fixture, html } from '@open-wc/testing';
 import { sendMouse } from '@web/test-runner-commands';
+
+import { MdOutlinedTextField } from '@scopedelement/material-web/textfield/MdOutlinedTextField.js';
 
 import './selection-list.js';
 import type { SelectionList, SelectItem } from './SelectionList.js';
@@ -81,6 +84,110 @@ describe('Custom List component SelectionList', () => {
       expect(list.selectedElements.length).to.equal(2);
       expect(list.selectedElements[0].getAttribute('name')).to.equal('gse0');
       expect(list.selectedElements[1].getAttribute('name')).to.equal('gse4');
+    });
+  });
+
+  describe('controlled search functionality', () => {
+    let list: SelectionList;
+    let searchChangeEvent: CustomEvent<{ value: string }> | null = null;
+
+    beforeEach(async () => {
+      list = await fixture(
+        html`<selection-list
+          .items=${[
+            { headline: 'Apple', supportingText: 'Red fruit', selected: true },
+            {
+              headline: 'Banana',
+              supportingText: 'Yellow fruit',
+              selected: false,
+            },
+            {
+              headline: 'Cherry',
+              supportingText: 'Small red fruit',
+              selected: true,
+            },
+          ]}
+          filterable
+          searchValue="test"
+          @search-change=${(e: CustomEvent<{ value: string }>) => {
+            searchChangeEvent = e;
+          }}
+        ></selection-list>`
+      );
+
+      await timeout(200);
+    });
+
+    it('uses controlled searchValue when provided', async () => {
+      const searchField = list.shadowRoot?.querySelector(
+        'md-outlined-text-field'
+      ) as MdOutlinedTextField;
+      expect(searchField?.value).to.equal('test');
+    });
+
+    it('dispatches search-change event when search input changes', async () => {
+      searchChangeEvent = null;
+      const searchField = list.shadowRoot?.querySelector(
+        'md-outlined-text-field'
+      ) as MdOutlinedTextField;
+
+      if (searchField) {
+        searchField.value = 'apple';
+        searchField.dispatchEvent(new Event('input'));
+
+        await timeout(200); // Wait for debounced event
+
+        expect(searchChangeEvent).to.not.be.null;
+        if (searchChangeEvent) {
+          const event = searchChangeEvent as CustomEvent<{ value: string }>;
+          expect(event.detail?.value).to.equal('apple');
+          expect(event.type).to.equal('search-change');
+          expect(event.bubbles).to.be.true;
+        }
+      }
+    });
+
+    it('updates search field value when searchValue prop changes', async () => {
+      list.searchValue = 'banana';
+      await list.updateComplete;
+
+      const searchField = list.shadowRoot?.querySelector(
+        'md-outlined-text-field'
+      ) as MdOutlinedTextField;
+      expect(searchField?.value).to.equal('banana');
+    });
+
+    it('filters items based on controlled searchValue', async () => {
+      list.searchValue = 'red';
+      await list.updateComplete;
+
+      const visibleItems = list.shadowRoot?.querySelectorAll(
+        'md-list-item:not(.hidden)'
+      );
+      expect(visibleItems?.length).to.equal(2);
+    });
+
+    it('preserves selection state during filtering', async () => {
+      expect(list.items.filter(item => item.selected)).to.have.length(2);
+
+      list.searchValue = 'red';
+      await list.updateComplete;
+
+      expect(list.items.filter(item => item.selected)).to.have.length(2);
+      expect(list.items.find(item => item.headline === 'Apple')?.selected).to.be
+        .true;
+      expect(list.items.find(item => item.headline === 'Cherry')?.selected).to
+        .be.true;
+    });
+
+    it('shows all items when searchValue is empty', async () => {
+      list.searchValue = '';
+      await list.updateComplete;
+
+      const visibleItems = list.shadowRoot?.querySelectorAll(
+        'md-list-item:not(.hidden)'
+      );
+      expect(visibleItems?.length).to.equal(3);
     });
   });
 });
