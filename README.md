@@ -43,15 +43,17 @@ This element was meant to be used only for plugins in this organization. If it s
 | `height`       |         | `number`       | `72`       | Height of each list item                                                  |                |
 | `filterable`   |         | `boolean`      | `false`    | Whether list items can be filtered on \`headline\` and \`supportingText\` | FilterListBase |
 | `searchhelper` |         | `string`       | `'search'` | Placeholder for search input field                                        | FilterListBase |
+| `searchRegex`  |         | `RegExp`       | `/.*/i`    |                                                                           | FilterListBase |
+| `searchValue`  |         | `string`       |            | Public getter/setter to get/set search input value                        | FilterListBase |
 
 <details><summary>Private API</summary>
 
 #### Fields
 
-| Name          | Privacy   | Type                     | Default | Description | Inherited From |
-| ------------- | --------- | ------------------------ | ------- | ----------- | -------------- |
-| `searchRegex` | protected | `RegExp`                 | `/.*/i` |             | FilterListBase |
-| `searchInput` | protected | `TextField \| undefined` |         |             | FilterListBase |
+| Name           | Privacy   | Type                     | Default | Description | Inherited From |
+| -------------- | --------- | ------------------------ | ------- | ----------- | -------------- |
+| `searchInput`  | protected | `TextField \| undefined` |         |             | FilterListBase |
+| `_searchValue` | protected | `string`                 | `''`    |             | FilterListBase |
 
 #### Methods
 
@@ -107,15 +109,17 @@ This element was meant to be used only for plugins in this organization. If it s
 | `selectedElements` |         | `Element[]`    |            |                                                                           |                |
 | `filterable`       |         | `boolean`      | `false`    | Whether list items can be filtered on \`headline\` and \`supportingText\` | FilterListBase |
 | `searchhelper`     |         | `string`       | `'search'` | Placeholder for search input field                                        | FilterListBase |
+| `searchRegex`      |         | `RegExp`       | `/.*/i`    |                                                                           | FilterListBase |
+| `searchValue`      |         | `string`       |            | Public getter/setter to get/set search input value                        | FilterListBase |
 
 <details><summary>Private API</summary>
 
 #### Fields
 
-| Name          | Privacy   | Type                     | Default | Description | Inherited From |
-| ------------- | --------- | ------------------------ | ------- | ----------- | -------------- |
-| `searchRegex` | protected | `RegExp`                 | `/.*/i` |             | FilterListBase |
-| `searchInput` | protected | `TextField \| undefined` |         |             | FilterListBase |
+| Name           | Privacy   | Type                     | Default | Description | Inherited From |
+| -------------- | --------- | ------------------------ | ------- | ----------- | -------------- |
+| `searchInput`  | protected | `TextField \| undefined` |         |             | FilterListBase |
+| `_searchValue` | protected | `string`                 | `''`    |             | FilterListBase |
 
 #### Methods
 
@@ -166,15 +170,17 @@ This element was meant to be used only for plugins in this organization. If it s
 | -------------- | ------- | --------- | ---------- | ------------------------------------------------------------------------- | -------------- |
 | `filterable`   |         | `boolean` | `false`    | Whether list items can be filtered on \`headline\` and \`supportingText\` |                |
 | `searchhelper` |         | `string`  | `'search'` | Placeholder for search input field                                        |                |
+| `searchRegex`  |         | `RegExp`  | `/.*/i`    |                                                                           |                |
+| `searchValue`  |         | `string`  |            | Public getter/setter to get/set search input value                        |                |
 
 <details><summary>Private API</summary>
 
 #### Fields
 
-| Name          | Privacy   | Type                     | Default | Description | Inherited From |
-| ------------- | --------- | ------------------------ | ------- | ----------- | -------------- |
-| `searchRegex` | protected | `RegExp`                 | `/.*/i` |             |                |
-| `searchInput` | protected | `TextField \| undefined` |         |             |                |
+| Name           | Privacy   | Type                     | Default | Description | Inherited From |
+| -------------- | --------- | ------------------------ | ------- | ----------- | -------------- |
+| `searchInput`  | protected | `TextField \| undefined` |         |             |                |
+| `_searchValue` | protected | `string`                 | `''`    |             |                |
 
 #### Methods
 
