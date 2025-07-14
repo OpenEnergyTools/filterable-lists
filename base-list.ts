@@ -46,23 +46,44 @@ export class FilterListBase extends ScopedElementsMixin(LitElement) {
   searchhelper = 'search';
 
   @state()
-  protected searchRegex: RegExp = /.*/i;
+  searchRegex: RegExp = /.*/i;
 
   @query('md-outlined-text-field')
   protected searchInput?: TextField;
 
+  @state()
+  protected _searchValue = '';
+
+  /** Public getter/setter to get/set search input value */
+  get searchValue(): string {
+    return this._searchValue;
+  }
+
+  set searchValue(value: string) {
+    const oldVal = this._searchValue;
+    if (oldVal === value) return;
+    this._searchValue = value;
+    this.searchRegex = searchRegex(value);
+    if (this.searchInput && this.searchInput.value !== value) {
+      this.searchInput.value = value;
+    }
+    this.requestUpdate('searchValue', oldVal);
+  }
+
   protected onFilter(): void {
-    this.searchRegex = searchRegex(this.searchInput?.value);
+    if (!this.searchInput) return;
+    this.searchValue = this.searchInput.value;
   }
 
   protected renderSearchField(): TemplateResult {
     return this.filterable
       ? html`<md-outlined-text-field
+          .value=${this._searchValue}
           placeholder="${this.searchhelper}"
           @input="${debounce(() => this.onFilter())}"
         >
-          <md-icon slot="leading-icon">search</md-icon></md-outlined-text-field
-        >`
+          <md-icon slot="leading-icon">search</md-icon>
+        </md-outlined-text-field>`
       : html``;
   }
 }
