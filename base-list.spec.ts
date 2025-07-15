@@ -2,7 +2,6 @@
 
 import { expect, fixture, html } from '@open-wc/testing';
 import { customElement } from 'lit/decorators.js';
-import { spy } from 'sinon';
 
 import { TextField } from '@scopedelement/material-web/textfield/internal/text-field';
 
@@ -66,25 +65,6 @@ describe('FilterListBase', () => {
       expect(regex.test('apple')).to.be.true;
       expect(regex.test('pineapple')).to.be.true;
       expect(regex.test('banana')).to.be.false;
-    });
-
-    it('setter ignores duplicate values', () => {
-      element.searchValue = 'test';
-      const requestUpdateSpy = spy(element, 'requestUpdate');
-      element.searchValue = 'test';
-      expect(requestUpdateSpy).to.not.have.been.called;
-      requestUpdateSpy.restore();
-    });
-
-    it('setter triggers requestUpdate for new values', () => {
-      element.searchValue = 'initial';
-      const requestUpdateSpy = spy(element, 'requestUpdate');
-      element.searchValue = 'changed';
-      expect(requestUpdateSpy).to.have.been.calledWith(
-        'searchValue',
-        'initial'
-      );
-      requestUpdateSpy.restore();
     });
   });
 

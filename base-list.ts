@@ -54,20 +54,17 @@ export class FilterListBase extends ScopedElementsMixin(LitElement) {
   @state()
   protected _searchValue = '';
 
-  /** Public getter/setter to get/set search input value */
-  get searchValue(): string {
-    return this._searchValue;
-  }
-
+  /** Current search filter value. Updates search regex when changed. */
+  @property({ type: String })
   set searchValue(value: string) {
     const oldVal = this._searchValue;
     if (oldVal === value) return;
     this._searchValue = value;
     this.searchRegex = searchRegex(value);
-    if (this.searchInput && this.searchInput.value !== value) {
-      this.searchInput.value = value;
-    }
-    this.requestUpdate('searchValue', oldVal);
+  }
+
+  get searchValue(): string {
+    return this._searchValue;
   }
 
   protected onFilter(): void {

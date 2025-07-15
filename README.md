@@ -44,7 +44,7 @@ This element was meant to be used only for plugins in this organization. If it s
 | `filterable`   |         | `boolean`      | `false`    | Whether list items can be filtered on \`headline\` and \`supportingText\` | FilterListBase |
 | `searchhelper` |         | `string`       | `'search'` | Placeholder for search input field                                        | FilterListBase |
 | `searchRegex`  |         | `RegExp`       | `/.*/i`    |                                                                           | FilterListBase |
-| `searchValue`  |         | `string`       |            | Public getter/setter to get/set search input value                        | FilterListBase |
+| `searchValue`  |         | `string`       |            | Current search filter value. Updates search regex when changed.           | FilterListBase |
 
 <details><summary>Private API</summary>
 
@@ -110,7 +110,7 @@ This element was meant to be used only for plugins in this organization. If it s
 | `filterable`       |         | `boolean`      | `false`    | Whether list items can be filtered on \`headline\` and \`supportingText\` | FilterListBase |
 | `searchhelper`     |         | `string`       | `'search'` | Placeholder for search input field                                        | FilterListBase |
 | `searchRegex`      |         | `RegExp`       | `/.*/i`    |                                                                           | FilterListBase |
-| `searchValue`      |         | `string`       |            | Public getter/setter to get/set search input value                        | FilterListBase |
+| `searchValue`      |         | `string`       |            | Current search filter value. Updates search regex when changed.           | FilterListBase |
 
 <details><summary>Private API</summary>
 
@@ -171,7 +171,7 @@ This element was meant to be used only for plugins in this organization. If it s
 | `filterable`   |         | `boolean` | `false`    | Whether list items can be filtered on \`headline\` and \`supportingText\` |                |
 | `searchhelper` |         | `string`  | `'search'` | Placeholder for search input field                                        |                |
 | `searchRegex`  |         | `RegExp`  | `/.*/i`    |                                                                           |                |
-| `searchValue`  |         | `string`  |            | Public getter/setter to get/set search input value                        |                |
+| `searchValue`  |         | `string`  |            | Current search filter value. Updates search regex when changed.           |                |
 
 <details><summary>Private API</summary>
 
