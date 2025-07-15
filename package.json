@@ -47,7 +47,7 @@
     "@typescript-eslint/parser": "^8.18.1",
     "@web/dev-server": "^0.4.6",
     "@web/dev-server-polyfill": "^1.0.4",
-    "@web/dev-server-storybook": "^0.0.2",
+    "@web/dev-server-storybook": "^2.0.3",
     "@web/test-runner": "0.19.0",
     "@web/test-runner-commands": "0.9.0",
     "@web/test-runner-playwright": "0.11.0",
